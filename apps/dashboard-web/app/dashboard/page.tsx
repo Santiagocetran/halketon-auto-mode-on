@@ -21,7 +21,7 @@ export default function DashboardPage() {
       <section className="metrics-grid" aria-label="Metricas principales">
         <Metric label="Tareas abiertas" value={summary.open} />
         <Metric label="Vencidas" value={summary.overdue} tone="danger" />
-        <Metric label="Sin due&ntilde;o" value={summary.unowned} />
+        <Metric label="Sin responsable" value={summary.unowned} />
         <Metric label="Esta semana" value={summary.dueThisWeek} />
       </section>
 
@@ -57,7 +57,7 @@ export default function DashboardPage() {
               <article className="task-row" key={task.id}>
                 <div>
                   <strong>{task.title}</strong>
-                  <span>{task.ownerName ?? "Sin dueno"} · {task.dueDate}</span>
+                  <span>{task.ownerName ?? "Sin responsable"} · {task.dueDate}</span>
                 </div>
                 <StatusPill status={task.status} />
               </article>
@@ -89,4 +89,3 @@ function Metric({
 function StatusPill({ status }: { status: string }) {
   return <span className={`status status--${status}`}>{status.replace("_", " ")}</span>;
 }
-

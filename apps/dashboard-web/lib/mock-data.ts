@@ -110,7 +110,7 @@ export function getDashboardSummary(tasks: Task[]) {
   const ownerMap = new Map<string, { name: string; total: number; overdue: number }>();
 
   for (const task of openTasks) {
-    const name = task.ownerName ?? "Sin dueno";
+    const name = task.ownerName ?? "Sin responsable";
     const current = ownerMap.get(name) ?? { name, total: 0, overdue: 0 };
     current.total += 1;
     if (overdueTasks.some((overdue) => overdue.id === task.id)) {
@@ -128,4 +128,3 @@ export function getDashboardSummary(tasks: Task[]) {
     riskTasks: [...overdueTasks, ...dueThisWeek].slice(0, 5)
   };
 }
-

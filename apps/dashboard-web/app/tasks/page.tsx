@@ -32,7 +32,7 @@ export default function TasksPage() {
           {mockTasks.map((task) => (
             <div className="table__row" key={task.id}>
               <span>{task.title}</span>
-              <span>{task.ownerName ?? "Sin dueno"}</span>
+              <span>{task.ownerName ?? "Sin responsable"}</span>
               <span>{task.dueDate ?? "-"}</span>
               <span>{task.status.replace("_", " ")}</span>
               <span>{Math.round(task.confidence * 100)}%</span>
@@ -43,4 +43,3 @@ export default function TasksPage() {
     </main>
   );
 }
-

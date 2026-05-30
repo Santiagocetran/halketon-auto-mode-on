@@ -1,7 +1,6 @@
-apps/dashboard-web/package-lock.json
-apps/dashboard-web/package.json
-*/node_modules
-*/.next
+**/node_modules
+**/.next
+**/tsconfig.tsbuildinfo
 */.env
 */.env.local
 */.env.development.local
