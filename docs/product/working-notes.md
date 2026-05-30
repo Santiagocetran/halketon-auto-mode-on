@@ -1,6 +1,6 @@
 # Halketon — Notas de trabajo
 
-Hackathon social del 6 de junio de 2026 organizada por Paisanos y Crecimiento Build (con Querido Lunes y Fardo). Tres tracks posibles centrados en problemas reales de ONGs argentinas. Ver brief completo en `halkethon-tracks.md`.
+Hackathon social del 6 de junio de 2026 organizada por Paisanos y Crecimiento Build (con Querido Lunes y Fardo). Tres tracks posibles centrados en problemas reales de ONGs argentinas. Ver brief completo en [`hackathon-brief.md`](hackathon-brief.md).
 
 ## Tracks elegidos
 
