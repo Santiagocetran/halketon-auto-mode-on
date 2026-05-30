@@ -1,0 +1,59 @@
+{
+  "name": "Halketon Reminder Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule",
+      "name": "Every 6 Hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL}}/rest/v1/tasks?status=in.(pending,in_progress,blocked)&due_date=lte.{{new Date().toISOString().slice(0,10)}}&select=*",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" }
+          ]
+        }
+      },
+      "id": "fetch-overdue",
+      "name": "Fetch Overdue Tasks",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "return ($json || []).map(task => ({ json: { task, reminderText: `Hace unos dias quedo pendiente: ${task.task_title}. Como va? Responde done, in_progress o blocked.` } }));"
+      },
+      "id": "prepare-reminders",
+      "name": "Prepare Reminders",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 0]
+    }
+  ],
+  "connections": {
+    "Every 6 Hours": {
+      "main": [[{ "node": "Fetch Overdue Tasks", "type": "main", "index": 0 }]]
+    },
+    "Fetch Overdue Tasks": {
+      "main": [[{ "node": "Prepare Reminders", "type": "main", "index": 0 }]]
+    }
+  }
+}
+

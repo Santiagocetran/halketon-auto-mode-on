@@ -1,0 +1,91 @@
+{
+  "name": "Halketon Task Capture",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "twilio-whatsapp-task-capture",
+        "httpMethod": "POST",
+        "responseMode": "onReceived"
+      },
+      "id": "twilio-webhook",
+      "name": "Twilio WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { senderPhone: $json.From, senderName: $json.ProfileName || null, body: $json.Body || '', rawPayload: $json } }];"
+      },
+      "id": "normalize",
+      "name": "Normalize Twilio Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SUPABASE_URL}}/rest/v1/inbound_messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=representation" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "sender_phone", "value": "={{$json.senderPhone}}" },
+            { "name": "sender_name", "value": "={{$json.senderName}}" },
+            { "name": "body", "value": "={{$json.body}}" },
+            { "name": "raw_payload", "value": "={{$json.rawPayload}}" }
+          ]
+        }
+      },
+      "id": "save-inbound",
+      "name": "Save Inbound Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [480, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const inbound = $json[0] || $json; return [{ json: { inboundMessageId: inbound.id, promptInput: { sender_name: inbound.sender_name, message: inbound.body, current_date: new Date().toISOString().slice(0, 10) } } }];"
+      },
+      "id": "prepare-extraction",
+      "name": "Prepare Extraction",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [720, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "throw new Error('Wire this node to the selected LLM provider using prompts/task-extraction.md and return strict JSON.');"
+      },
+      "id": "llm-placeholder",
+      "name": "LLM Task Extraction Placeholder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 0]
+    }
+  ],
+  "connections": {
+    "Twilio WhatsApp Webhook": {
+      "main": [[{ "node": "Normalize Twilio Payload", "type": "main", "index": 0 }]]
+    },
+    "Normalize Twilio Payload": {
+      "main": [[{ "node": "Save Inbound Message", "type": "main", "index": 0 }]]
+    },
+    "Save Inbound Message": {
+      "main": [[{ "node": "Prepare Extraction", "type": "main", "index": 0 }]]
+    },
+    "Prepare Extraction": {
+      "main": [[{ "node": "LLM Task Extraction Placeholder", "type": "main", "index": 0 }]]
+    }
+  }
+}
+
