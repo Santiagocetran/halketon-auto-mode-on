@@ -37,6 +37,12 @@ flowchart TD
 - [`architecture/data-model.md`](architecture/data-model.md) — ERD, table reference, enums, conventions.
 - [`diagrams/flows.md`](diagrams/flows.md) — runtime sequence diagrams (task capture, meeting extraction, reminders).
 
+### Team / Process (the *how we work*)
+- [`team/README.md`](team/README.md) — **hackathon playbook.** Roles, the 3 un-blocking rules, kickoff decisions.
+- [`team/roles-and-ownership.md`](team/roles-and-ownership.md) — vertical slices, file-ownership map, shared contracts.
+- [`team/git-workflow.md`](team/git-workflow.md) — branches, PRs, merge rules, integration freeze.
+- [`team/timeline-and-checkpoints.md`](team/timeline-and-checkpoints.md) — hour-by-hour plan, Definition of Done, smoke checklist, demo runbook, cut list.
+
 ### Decisions
 - [`decisions/0001-mvp-stack.md`](decisions/0001-mvp-stack.md) — ADR: why Twilio + n8n + Supabase + Next.js.
 
