@@ -5,6 +5,7 @@ Everything the 4-person team needs to ship the full MVP in ~10 hours, co-located
 
 - [`roles-and-ownership.md`](roles-and-ownership.md) — who owns what, load balance, the two seams, how we collaborate
 - [`git-workflow.md`](git-workflow.md) — branches, PRs, merge rules, integration freeze
+- [`testing.md`](testing.md) — TDD approach, the testable-core pattern, tooling, worked examples, per-role guide
 - [`timeline-and-checkpoints.md`](timeline-and-checkpoints.md) — hour-by-hour plan, Definition of Done, smoke checklist, demo runbook, cut list
 
 ---

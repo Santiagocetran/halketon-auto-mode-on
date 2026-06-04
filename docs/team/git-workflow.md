@@ -36,7 +36,8 @@ gitGraph
 - **Keep PRs small and frequent** — merge at least every ~2 hours. A giant end-of-day PR is how hackathons lose the last hour to conflicts.
 - **No gatekeeper — peer glance, then author merges.** Co-located: ask any teammate for a quick look (~2 min, over the shoulder or in the PR), and once it's green and glanced, the **author merges their own PR**. This keeps everyone moving without a single bottleneck.
 - **P4 owns trunk health overall** — not as a gate on every PR, but as the person who runs the end-to-end smoke check at each checkpoint and owns the final integration + freeze (below).
-- PR description = one line: what it does + how you smoke-tested it.
+- **Run the unit tests for the package you touched before you open the PR** (`packages/core` and/or `apps/dashboard-web` — each has its own `npm test`; there's no root one). The pure-logic suite should be green (see [`testing.md`](testing.md)). It's part of the peer-glance, not a CI gate.
+- PR description = one line: what it does + how you tested it (unit + smoke).
 
 ## Commits — conventional commits
 

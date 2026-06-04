@@ -118,7 +118,11 @@ your lane; coordinate on the two seams.
 | `apps/dashboard-web/**` | P3 |
 | `database/**` | P4 |
 | `prompts/**` | P4 |
+| `packages/core/**` *(shared pure logic + tests)* | **shared** — coordinate before editing |
 | `docs/**` | anyone (small PRs) |
+
+`packages/core/` is the one shared module: the TDD'd pure logic (normalizers, validators,
+mappers) that n8n mirrors and the dashboard imports. See [`testing.md`](testing.md).
 
 ---
 

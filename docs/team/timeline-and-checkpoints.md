@@ -42,7 +42,7 @@ gantt
 ### H0:30–1:15 — Setup spike
 - **P4:** deploy `schema.sql` + `seeds.sql`. Announce "tables live" (~15 min). Then start `meeting-capture`.
 - **P1 + P2 pair:** wire n8n credentials (Supabase service-role, Twilio, LLM key), get the Twilio webhook hitting n8n, confirm one raw message lands in `inbound_messages`.
-- **P3:** install deps, connect the dashboard to Supabase, render `seeds.sql` data live (no waiting on the pipeline).
+- **P3:** install deps, connect the dashboard to Supabase, render `seeds.sql` data live (no waiting on the pipeline). Scaffold the Vitest + `packages/core` test harness (~15 min, per [`testing.md`](testing.md) §4) so the TDD loop is ready for everyone.
 
 ### H1:15–4:00 — Parallel build to the first full slice
 - P1: finish capture (LLM → validate → insert task → confirm).
@@ -75,7 +75,8 @@ Honest status per flow. Decide what (if anything) gets cut. Begin integration pa
 
 ## Definition of Done (per slice)
 
-A slice is "done" only when **merged to `main` and smoke-passing**:
+A slice is "done" only when its **pure logic has passing unit tests** (see
+[`testing.md`](testing.md)), it's **merged to `main`**, and it's **smoke-passing**:
 
 - **Capture (P1):** sending a WhatsApp message creates a `tasks` row with owner/due/priority and the sender gets a confirmation reply.
 - **Follow-up loop (P2):** Twilio send works; a due task triggers exactly one reminder (no duplicates on re-run); replying `done`/`in_progress`/`blocked` updates the task.
