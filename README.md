@@ -45,6 +45,7 @@ flowchart LR
 | [docs/decisions/0001-mvp-stack.md](docs/decisions/0001-mvp-stack.md) | ADR: stack choice |
 | [docs/decisions/0002-whatsapp-1-1-channel.md](docs/decisions/0002-whatsapp-1-1-channel.md) | ADR: 1:1 WhatsApp channel |
 | [docs/product/channel-and-transcripts.md](docs/product/channel-and-transcripts.md) | Channel model + Meet/Zoom transcript paths |
+| [docs/team/deployment.md](docs/team/deployment.md) | Deploy route (Supabase + Coolify) |
 
 ## Repository map
 

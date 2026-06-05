@@ -46,6 +46,7 @@ flowchart TD
 - [`team/git-workflow.md`](team/git-workflow.md) — branches, PRs, merge rules, integration freeze.
 - [`team/testing.md`](team/testing.md) — TDD approach, what is/isn't testable here, tooling, worked examples, per-role guide.
 - [`team/timeline-and-checkpoints.md`](team/timeline-and-checkpoints.md) — hour-by-hour plan, Definition of Done, smoke checklist, demo runbook, cut list.
+- [`team/deployment.md`](team/deployment.md) — **deploy route** (Supabase Free + n8n + dashboard en Coolify).
 
 ### Decisions
 - [`decisions/README.md`](decisions/README.md) — ADR index.
