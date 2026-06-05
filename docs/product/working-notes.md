@@ -21,9 +21,9 @@ El hilo común no es tanto "no adoptan tecnología" sino **"no adoptan nada que 
 
 ### Track 1 — Coordinación
 
-1. **Bot de WhatsApp que captura compromisos del chat.** La gente sigue hablando en WhatsApp; el bot escucha (o se le menciona / reacciona con emoji) y convierte "yo me encargo del reporte para el viernes" en una tarea con dueño y deadline. Dirección abre una vista web con la carga real del equipo. Resuelve directamente "responsabilidades bien asignadas en reunión, plazos perdidos" y "dirección no ve la carga real".
-2. **Reuniones → tareas accionables.** Sube la grabación o transcripción de Meet/Zoom, el LLM extrae compromisos (quién, qué, cuándo), manda a cada persona por WhatsApp un mensaje individual con sus tareas y plazos. Memoria queda en un doc compartido.
-3. **Recordatorios proactivos por WhatsApp.** En vez de pedirles abrir una app, el sistema manda "hace 3 días dijiste que ibas a mandar X, ¿cómo va? ✅/⏳/🚫". Una palabra de respuesta actualiza estado.
+1. **Canal WhatsApp 1:1 para capturar compromisos.** *(Ajustado: la visión original era un bot en el grupo; Twilio Sandbox solo permite 1:1.)* El equipo sigue coordinando en sus chats habituales; cuando alguien cierra un compromiso, **le escribe al bot en privado**: "yo me encargo del reporte para el viernes". El LLM lo convierte en tarea con dueño y deadline. Dirección ve la carga en el dashboard. Ver [`channel-and-transcripts.md`](channel-and-transcripts.md) y [ADR 0002](../decisions/0002-whatsapp-1-1-channel.md).
+2. **Reuniones → tareas accionables.** El coordinador pega (o sube) la transcripción de Meet/Zoom; el LLM extrae compromisos (quién, qué, cuándo). Opcionalmente el sistema manda a cada persona un WhatsApp **individual** con sus tareas. Paths para obtener la transcripción: [`channel-and-transcripts.md`](channel-and-transcripts.md).
+3. **Recordatorios proactivos por WhatsApp 1:1.** En vez de pedirles abrir una app, el bot le escribe al responsable: "hace 3 días dijiste que ibas a mandar X, ¿cómo va? ✅/⏳/🚫". Una palabra de respuesta actualiza estado.
 4. **Detector de deadlines invisibles.** Vencimientos de certificados web, renovaciones de software, fechas estatutarias. Más nicho, pero resuelve un dolor concreto y costoso.
 
 ### Track 3 — Beneficiarios e impacto
@@ -40,7 +40,7 @@ El hilo común no es tanto "no adoptan tecnología" sino **"no adoptan nada que 
 
 Mismo core técnico para T1 y T3:
 
-- la gente escribe o habla normal en el canal donde ya están
+- la gente escribe al bot (1:1) o el coordinador registra desde reuniones — sin app nueva
 - un LLM convierte texto / audio / foto en estructura
 - la estructura alimenta un dashboard simple (web)
 - el sistema devuelve algo útil de inmediato (confirmación, resumen, recordatorio) — no es solo data entry para que otro lo lea
@@ -60,7 +60,7 @@ Eso permite que un solo proyecto base pueda configurarse como *tracker de tareas
 
 Una hackathon de un día. Apuntar a:
 
-- bot de WhatsApp (Twilio o WhatsApp Cloud API) con detección de intent vía LLM
+- captura WhatsApp **1:1** vía Twilio Sandbox con detección de intent vía LLM
 - backend mínimo (Supabase / Postgres) que guarda estructurado
 - dashboard web simple (Next.js) para que la dirección vea el agregado
 - un generador de reporte (PDF / plantilla) que demuestre el valor de tener los datos ordenados
@@ -69,7 +69,8 @@ Con eso podemos demostrar T1 (vista de carga del equipo) o T3 (reporte para fina
 
 ## Pendientes / a definir
 
+- ~~Decidir stack concreto (WhatsApp Cloud API vs. Twilio)~~ → **Twilio Sandbox 1:1** (ver ADR 0002)
 - ¿Cuál de los dos tracks priorizamos para el demo del día? (mismo core, dos demos posibles)
-- Decidir stack concreto (WhatsApp Cloud API vs. Twilio; modelo de LLM; hosting)
 - ¿Conseguir una ONG "piloto" para validar antes del 6/6?
 - Privacidad: cómo manejar datos sensibles en T3 desde el día 1
+- Post-MVP: webhook Zoom para transcripciones automáticas (ver [`channel-and-transcripts.md`](channel-and-transcripts.md))

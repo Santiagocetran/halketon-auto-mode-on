@@ -40,7 +40,7 @@ sequenceDiagram
   participant DB as Supabase
   participant Dashboard
 
-  User->>WhatsApp: "Yo hago el informe para el viernes"
+  User->>WhatsApp: "Yo hago el informe para el viernes" (1:1 chat with bot)
   WhatsApp->>n8n: POST webhook (From, ProfileName, Body)
   n8n->>DB: insert inbound_messages (raw payload)
   DB-->>n8n: message id
@@ -58,6 +58,10 @@ sequenceDiagram
 
 ## 2. Meeting transcript extraction _(planned)_
 
+Coordinator obtains transcript text (paste from Meet/Zoom export — see
+[`../product/channel-and-transcripts.md`](../product/channel-and-transcripts.md)).
+Extraction runs in n8n via webhook, not in the browser (LLM keys stay server-side).
+
 ```mermaid
 sequenceDiagram
   autonumber
@@ -66,13 +70,15 @@ sequenceDiagram
   participant LLM
   participant DB as Supabase
 
-  User->>Dashboard: paste / upload transcript
-  Dashboard->>LLM: meeting-summary prompt (transcript, current_date)
-  LLM-->>Dashboard: strict JSON {summary, tasks[], ambiguities[]}
-  Dashboard->>DB: insert meeting (transcript + summary)
-  Dashboard->>DB: insert tasks (source_type = 'meeting')
-  Dashboard->>DB: insert meeting_tasks (link)
-  Note over Dashboard,DB: optional: notify each assignee on WhatsApp
+  User->>Dashboard: paste transcript (from Meet/Zoom export or demo text)
+  Dashboard->>n8n: POST { transcript } (meeting-capture webhook)
+  n8n->>LLM: meeting-summary prompt (transcript, current_date)
+  LLM-->>n8n: strict JSON {summary, tasks[], ambiguities[]}
+  n8n->>DB: insert meeting (transcript + summary)
+  n8n->>DB: insert tasks (source_type = 'meeting')
+  n8n->>DB: insert meeting_tasks (link)
+  n8n-->>Dashboard: { summary, tasks[] }
+  Note over n8n,DB: optional: notify each assignee on WhatsApp (1:1)
 ```
 
 ---

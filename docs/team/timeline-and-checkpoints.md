@@ -103,12 +103,12 @@ A slice is "done" only when its **pure logic has passing unit tests** (see
 
 ## Demo runbook (~3 min)
 
-1. **Hook (15s):** "NGOs drown in WhatsApp. Halketon turns those messages into a memory leadership can see."
-2. **Capture (45s):** send a real WhatsApp message live → show the confirmation → show it appear on the dashboard.
+1. **Hook (15s):** "NGOs drown in WhatsApp. Halketon turns commitments into a memory leadership can see — message the bot in private, or paste a meeting transcript."
+2. **Capture (45s):** send a real **1:1** WhatsApp message to the sandbox → confirmation → task on dashboard.
 3. **Visibility (30s):** dashboard — open/overdue, load by person, unowned, this-week.
-4. **Loop (45s):** trigger a reminder → reply `done` on the phone → dashboard updates.
-5. **Meetings (30s):** paste a transcript → multiple tasks land.
-6. **Close (15s):** same engine serves Track 1 (tasks) and could serve Track 3 (beneficiaries). Onboarding = adding a WhatsApp contact.
+4. **Loop (45s):** trigger a reminder (1:1) → reply `done` on the phone → dashboard updates.
+5. **Meetings (30s):** paste a transcript (from Meet/Zoom export or demo text) → multiple tasks land.
+6. **Close (15s):** same engine for Track 1; onboarding = add the bot as a WhatsApp contact.
 
 Have a **screen recording of the smoke checklist passing** as a fallback in case live WhatsApp/network fails during the demo.
 

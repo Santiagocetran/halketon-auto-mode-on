@@ -20,12 +20,16 @@ flowchart LR
 
 ## Demo narrative
 
-1. A team member sends a WhatsApp message: `Yo hago el informe para el viernes`.
-2. n8n receives the Twilio webhook and runs the task-extraction prompt.
-3. The LLM returns strict JSON with owner, task, due date, status, priority, confidence.
-4. Supabase stores the task.
-5. The dashboard shows open work, overdue work, owners, and upcoming deadlines.
-6. n8n sends reminders and updates task status from quick replies.
+1. *(Optional)* A coordinator pastes a Meet/Zoom transcript on the dashboard → multiple tasks appear.
+2. A team member sends a **private** WhatsApp message to the bot: `Yo hago el informe para el viernes`.
+3. n8n receives the Twilio webhook and runs the task-extraction prompt.
+4. The LLM returns strict JSON with owner, task, due date, status, priority, confidence.
+5. Supabase stores the task.
+6. The dashboard shows open work, overdue work, owners, and upcoming deadlines.
+7. n8n sends **1:1** reminders and updates task status from quick replies.
+
+> Channel model (1:1, not group) and how to obtain Meet/Zoom transcripts:
+> [`docs/product/channel-and-transcripts.md`](docs/product/channel-and-transcripts.md)
 
 ## Documentation
 
@@ -39,6 +43,8 @@ flowchart LR
 | [docs/product/hackathon-brief.md](docs/product/hackathon-brief.md) | Official challenge brief (3 tracks) |
 | [docs/product/working-notes.md](docs/product/working-notes.md) | Team strategy & brainstorm |
 | [docs/decisions/0001-mvp-stack.md](docs/decisions/0001-mvp-stack.md) | ADR: stack choice |
+| [docs/decisions/0002-whatsapp-1-1-channel.md](docs/decisions/0002-whatsapp-1-1-channel.md) | ADR: 1:1 WhatsApp channel |
+| [docs/product/channel-and-transcripts.md](docs/product/channel-and-transcripts.md) | Channel model + Meet/Zoom transcript paths |
 
 ## Repository map
 
@@ -70,10 +76,10 @@ Open `http://localhost:3000`. The dashboard uses local mock data
 
 **In scope**
 
-- 1:1 WhatsApp capture through the Twilio Sandbox.
-- Natural-language task extraction.
-- Meeting transcript → task extraction.
-- Reminder status updates via quick replies.
+- 1:1 WhatsApp capture through the Twilio Sandbox (private chat with the bot — not group automation).
+- Natural-language task extraction when someone messages the bot directly.
+- Meeting transcript → task extraction (paste in dashboard; export paths in docs).
+- Reminder status updates via 1:1 quick replies.
 - A simple leadership dashboard.
 
 **Out of scope**

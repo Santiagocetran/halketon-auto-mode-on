@@ -8,6 +8,8 @@ Accepted for hackathon MVP.
 
 The product must demonstrate value in one day. The core risk is adoption, not technical depth. The system should use the channel NGOs already use and avoid a new operational tool with heavy onboarding.
 
+The original brainstorm envisioned a bot listening in a **WhatsApp group**. Twilio Sandbox only supports **1:1** messaging; the MVP adopts direct messages to the bot instead. See [ADR 0002](./0002-whatsapp-1-1-channel.md) and [`../product/channel-and-transcripts.md`](../product/channel-and-transcripts.md).
+
 ## Decision
 
 Use:

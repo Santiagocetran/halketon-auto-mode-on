@@ -16,12 +16,14 @@ flowchart TD
     P1["mvp-definition.md"]
     P2["hackathon-brief.md"]
     P3["working-notes.md"]
+    P4["channel-and-transcripts.md"]
   end
   subgraph A[Architecture — how]
     A1["overview.md"]
     A2["data-model.md"]
     A3["diagrams/flows.md"]
     A4["decisions/0001-mvp-stack.md"]
+    A5["decisions/0002-whatsapp-1-1-channel.md"]
   end
 ```
 
@@ -29,6 +31,7 @@ flowchart TD
 
 ### Product (the *why*)
 - [`product/mvp-definition.md`](product/mvp-definition.md) — thesis, users, hero use case, features, non-goals, demo script.
+- [`product/channel-and-transcripts.md`](product/channel-and-transcripts.md) — **WhatsApp 1:1 channel model** (vs. group bot) and Meet/Zoom transcript paths (MVP → automation).
 - [`product/hackathon-brief.md`](product/hackathon-brief.md) — the official Halketon challenge brief (3 tracks, drawn from 16 NGO interviews).
 - [`product/working-notes.md`](product/working-notes.md) — team strategy & brainstorm (track choice, adoption principles, scope).
 
@@ -45,7 +48,9 @@ flowchart TD
 - [`team/timeline-and-checkpoints.md`](team/timeline-and-checkpoints.md) — hour-by-hour plan, Definition of Done, smoke checklist, demo runbook, cut list.
 
 ### Decisions
+- [`decisions/README.md`](decisions/README.md) — ADR index.
 - [`decisions/0001-mvp-stack.md`](decisions/0001-mvp-stack.md) — ADR: why Twilio + n8n + Supabase + Next.js.
+- [`decisions/0002-whatsapp-1-1-channel.md`](decisions/0002-whatsapp-1-1-channel.md) — ADR: 1:1 channel (not group bot).
 
 ### Reference
 - [`reference/`](reference/) — source PDF (base architecture & product definition).

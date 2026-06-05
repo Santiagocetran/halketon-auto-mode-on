@@ -97,7 +97,7 @@ flowchart LR
 
 | Component | Tech | Responsibility | Explicit non-responsibility |
 |---|---|---|---|
-| **Messaging edge** | Twilio WhatsApp Sandbox | Receive 1:1 WhatsApp messages, forward body + sender metadata to n8n, send confirmations & reminders | No WhatsApp **group** automation in the MVP |
+| **Messaging edge** | Twilio WhatsApp Sandbox | Receive **1:1** WhatsApp messages, forward body + sender metadata to n8n, send confirmations & reminders | No WhatsApp **group** automation in the MVP — see [`../product/channel-and-transcripts.md`](../product/channel-and-transcripts.md) |
 | **Orchestration** | n8n | Receive webhooks, call the LLM, validate strict JSON, insert/update Supabase, send outbound messages | Does **not** own business rules — it orchestrates only |
 | **Intelligence** | LLM + prompt templates | Extract tasks from messages and commitments from transcripts; return strict JSON with a confidence score and ambiguity flags | Does **not** persist anything or make product decisions |
 | **Source of truth** | Supabase / PostgreSQL | Durable, normalized state for people, messages, tasks, meetings, reminders | Does **not** parse raw text |
@@ -212,7 +212,7 @@ flowchart LR
 | `task-capture` workflow | 🟡 Partial | Stops at an LLM **placeholder node** — no extraction, insert, or confirmation yet |
 | `reminder-engine` workflow | 🟡 Partial | Builds reminder text but has **no send node** and no dedup via `reminders` table |
 | Live dashboard reads | 🔴 Not started | Swap `mock-data.ts` for Supabase queries |
-| Meeting extraction flow | 🔴 Not started | Prompt + tables exist; UI/LLM wiring pending |
+| Meeting extraction flow | 🔴 Not started | Prompt + tables exist; MVP = paste transcript ([paths](../product/channel-and-transcripts.md)); UI/n8n wiring pending |
 
 Legend: ✅ done · 🟡 partial · 🔴 not started.
 
